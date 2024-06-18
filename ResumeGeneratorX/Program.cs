@@ -56,7 +56,7 @@ namespace ResumeGeneratorX
             {
                 ResumeInfo? rio = JsonSerializer.Deserialize<ResumeInfo>(File.ReadAllText(input.FullName));
                 ArgumentNullException.ThrowIfNull(rio);
-                HtmlGenBase htmlGen = new(rio);
+                Template2Gen htmlGen = new(rio);
                 var s = htmlGen.GenHtml();
                 File.WriteAllText($"{output.FullName}\\{Path.GetFileNameWithoutExtension(input.Name)}.html", s.ToString());
             }

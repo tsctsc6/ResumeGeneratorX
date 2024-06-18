@@ -4,8 +4,8 @@ namespace ResumeGeneratorX
 {
     internal class HtmlGenBase
     {
-        private const string assetsBasePath = @".\Assets\";
-        private readonly ResumeInfo rio;
+        protected const string assetsBasePath = @".\Assets\";
+        protected readonly ResumeInfo rio;
 
         public HtmlGenBase(ResumeInfo rio)
         {
@@ -21,11 +21,11 @@ namespace ResumeGeneratorX
             sb.Append("</html>");
             return sb;
         }
-        private void GenHead(StringBuilder sb)
+        protected void GenHead(StringBuilder sb)
         {
             sb.Append(File.ReadAllText($"{assetsBasePath}head.txt"));
         }
-        private void GenBody(StringBuilder sb)
+        protected void GenBody(StringBuilder sb)
         {
             sb.Append("<body lang=\"zh-CN\" class=\"\" style=\"\">" +
                 "<div id=\"___gatsby\">" +
@@ -33,7 +33,7 @@ namespace ResumeGeneratorX
                 "<div class=\"ant-spin-nested-loading\">" +
                 "<div class=\"ant-spin-container\">" +
                 "<div class=\"page\">");
-
+            GenResumeContent(sb);
             sb.Append("<div class=\"box-size-info\" style=\"top: 4px; left: 0px;\">(0, 0)</div>" +
                 "</div></div></div></div>" +
                 "<div id=\"gatsby-announcer\"" +
@@ -48,6 +48,10 @@ namespace ResumeGeneratorX
                 "</div>" +
                 "<style rc-util-key=\"antd-wave\"></style>" +
                 "</body>");
+        }
+        protected virtual void GenResumeContent(StringBuilder sb)
+        {
+
         }
     }
 }
