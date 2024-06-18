@@ -9,9 +9,9 @@
         "AboutMe": "自我介绍"
     },
     "Avatar": {
-        "Src": "https://avatars.githubusercontent.com/u/93368014?v=4",
+        "Src": "file://C:/Users/ASUS/Desktop/a.png",
         "IsHidden": false,
-        "Shape": "square"
+        "Size": "5x7"
     },
     "Profile": {
         "Name": "姓名",
@@ -90,8 +90,8 @@
         },
         {
             "SkillName": "React / 前端工程化",
-            "SkillDesc": "大型前端项目经验以及组件库开发经验",
-            "SkillLevel": 80
+            "SkillDesc": "大型前端项目经验以及组件库开发经验，大型前端项目经验以及组件库开发经验，大型前端项目经验以及组件库开发经验，大型前端项目经验以及组件库开发经验",
+            "SkillLevel": 20
         }
     ],
     "ProjectList": [
