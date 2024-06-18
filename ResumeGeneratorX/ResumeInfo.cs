@@ -48,7 +48,7 @@
 
     public class AboutMe
     {
-        public string? AboutMe_Desc { get; set; }
+        public string? AboutMeDesc { get; set; }
     }
 
     public class Theme
@@ -83,7 +83,7 @@
 
     public class Skill
     {
-        public string? skillName { get; set; }
+        public string? SkillName { get; set; }
         public string? SkillDesc { get; set; }
         public int SkillLevel { get; set; }
     }
