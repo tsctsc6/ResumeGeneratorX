@@ -1,8 +1,9 @@
 ﻿using System.Text;
+using System.Text.RegularExpressions;
 
 namespace ResumeGeneratorX
 {
-    internal class HtmlGenBase
+    internal partial class HtmlGenBase
     {
         protected const string assetsBasePath = @".\Assets";
         protected readonly ResumeInfo rio;
@@ -23,7 +24,18 @@ namespace ResumeGeneratorX
         }
         protected void GenHead(StringBuilder sb)
         {
-            sb.Append(File.ReadAllText($"{assetsBasePath}\\head.txt"));
+            sb.Append(File.ReadAllText($"{assetsBasePath}\\head1.txt"));
+            // 查看头像比例（宽x高）
+            var sizeStrings = rio.Avatar.Size.Split('x');
+            double w = double.Parse(sizeStrings[0]);
+            double h = double.Parse(sizeStrings[1]);
+            // 修改头像高宽比例
+            string s = File.ReadAllText($"{assetsBasePath}\\head2.txt");
+            var s2 = FindHeight().Replace(s, (m) => (
+                $"height: {double.Parse(m.Groups[1].Value) * h / w}px"));
+            Console.WriteLine(s2);
+            sb.Append(s2);
+            sb.Append(File.ReadAllText($"{assetsBasePath}\\head3.txt"));
         }
         protected void GenBody(StringBuilder sb)
         {
@@ -53,5 +65,11 @@ namespace ResumeGeneratorX
         {
 
         }
+        /*
+        [GeneratedRegex("width: \\d+px;")]
+        private static partial Regex FindWidth();
+        */
+        [GeneratedRegex("height: (\\d+)px")]
+        private static partial Regex FindHeight();
     }
 }

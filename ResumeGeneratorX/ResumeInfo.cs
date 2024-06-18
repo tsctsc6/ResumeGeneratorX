@@ -31,7 +31,7 @@
     {
         public string Src { get; set; } = "./DefaultAvatar.png";
         public bool IsHidden { get; set; } = false;
-        public string Shape { get; set; } = "square";
+        public string Size { get; set; } = "1x1";
     }
 
     public class Profile
