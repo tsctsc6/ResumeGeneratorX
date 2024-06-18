@@ -10,7 +10,7 @@
         public Award[]? AwardList { get; set; }
         public WorkExp[]? WorkExpList { get; set; }
         public Skill[]? SkillList { get; set; }
-        public ProjectList[]? ProjectList { get; set; }
+        public Project[]? ProjectList { get; set; }
         public Work[]? WorkList { get; set; }
         public AboutMe? AboutMe { get; set; }
         public Theme Theme { get; set; } = new();
@@ -88,7 +88,7 @@
         public int SkillLevel { get; set; }
     }
 
-    public class ProjectList
+    public class Project
     {
         public string? ProjectName { get; set; }
         public string? ProjectRole { get; set; }

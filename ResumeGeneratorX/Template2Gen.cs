@@ -21,7 +21,67 @@ namespace ResumeGeneratorX
         {
             sb.Append("<div class=\"main-info\">");
             GenSectionExperience(sb);
+            GenSectionProject(sb);
             sb.Append("</div>");
+        }
+
+        private void GenSectionProject(StringBuilder sb)
+        {
+            sb.Append("<div class=\"section project\">");
+            GenSectionProjecTitle(sb);
+            GenSectionProjecBody(sb);
+            sb.Append("</div>");
+        }
+
+        private void GenSectionProjecBody(StringBuilder sb)
+        {
+            sb.Append("<div class=\"section-body\">");
+            sb.Append("<div class=\"section section-project\">");
+            if (rio.ProjectList is not null)
+                foreach (var item in rio.ProjectList)
+                    GenSectionProjecItem(sb, item);
+            sb.Append("</div>");
+            sb.Append("</div>");
+        }
+
+        private void GenSectionProjecItem(StringBuilder sb, Project item)
+        {
+            sb.Append("<div class=\"section-item\">");
+            sb.Append("<div class=\"section-info\">");
+            sb.Append("<b class=\"info-name\">");
+            sb.Append(item.ProjectName);
+            sb.Append("<span class=\"info-time\">");
+            sb.Append($"{item.ProjectTime}");
+            sb.Append("</span>");
+            sb.Append("</b>");
+            sb.Append("<span class=\"ant-tag ant-tag-has-color\" style=\"background-color: rgb(139, 195, 74);\">");
+            sb.Append(item.ProjectRole);
+            sb.Append("</span>");
+            sb.Append("</div>");
+            sb.Append("<div class=\"section-detail\">");
+            sb.Append("<span>");
+            sb.Append("项目描述：");
+            sb.Append("</span>");
+            sb.Append("<span>");
+            sb.Append(item.ProjectDesc);
+            sb.Append("</span>");
+            sb.Append("</div>");
+            sb.Append("<div class=\"section-detail\">");
+            sb.Append("<span>");
+            sb.Append("主要工作：");
+            sb.Append("</span>");
+            sb.Append("<span class=\"project-content\">");
+            sb.Append(item.ProjectContent);
+            sb.Append("</span>");
+            sb.Append("</div>");
+            sb.Append("</div>");
+        }
+
+        private void GenSectionProjecTitle(StringBuilder sb)
+        {
+            sb.Append("<div class=\"section-title\" style=\"color: rgb(47, 87, 133);\"><span class=\"title\">");
+            sb.Append(rio.TitleNameMap.ProjectList);
+            sb.Append("</span><span class=\"title-addon\"></span></div>");
         }
 
         private void GenSectionExperience(StringBuilder sb)
