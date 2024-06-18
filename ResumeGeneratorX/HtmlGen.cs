@@ -4,7 +4,7 @@ namespace ResumeGeneratorX
 {
     internal class HtmlGenBase
     {
-        protected const string assetsBasePath = @".\Assets\";
+        protected const string assetsBasePath = @".\Assets";
         protected readonly ResumeInfo rio;
 
         public HtmlGenBase(ResumeInfo rio)
@@ -23,7 +23,7 @@ namespace ResumeGeneratorX
         }
         protected void GenHead(StringBuilder sb)
         {
-            sb.Append(File.ReadAllText($"{assetsBasePath}head.txt"));
+            sb.Append(File.ReadAllText($"{assetsBasePath}\\head.txt"));
         }
         protected void GenBody(StringBuilder sb)
         {
