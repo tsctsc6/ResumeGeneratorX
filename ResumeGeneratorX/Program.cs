@@ -29,7 +29,8 @@ namespace ResumeGeneratorX
             templateOption.AddAlias("-t");
             templateOption.Arity = ArgumentArity.ZeroOrOne;
 
-            var rootCommand = new RootCommand("Generate Resume HTML from JSON.");
+            var rootCommand = new RootCommand("Generate Resume HTML from JSON.\n" +
+                "推荐在Microsoft Edge 打印为PDF，记得在打印界面把“更多设置”=>“背景图形”打开");
             rootCommand.AddOption(inputFileOption);
             rootCommand.AddOption(outputDirectoryOption);
             rootCommand.AddOption(templateOption);
