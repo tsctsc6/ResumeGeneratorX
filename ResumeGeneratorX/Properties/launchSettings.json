@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "ResumeGeneratorX": {
+      "commandName": "Project",
+      "commandLineArgs": "-i .\\Assets\\example.json"
+    }
+  }
+}
