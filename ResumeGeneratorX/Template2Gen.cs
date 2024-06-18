@@ -20,7 +20,85 @@ namespace ResumeGeneratorX
         {
             sb.Append("<div class=\"basic-info\">");
             GenProfile(sb);
+            GenSectionEducation(sb);
+            GenSectionWork(sb);
             sb.Append("</div>");
+        }
+
+        private void GenSectionWork(StringBuilder sb)
+        {
+            sb.Append("<div class=\"section section section-work\">");
+            GenSectionWorkTitle(sb);
+            GenSectionWorkBody(sb);
+            sb.Append("</div>");
+        }
+
+        private void GenSectionWorkBody(StringBuilder sb)
+        {
+            sb.Append("<div class=\"section-body\">");
+            if (rio.WorkList is not null)
+                foreach (var item in rio.WorkList)
+                    GenSectionWorkItem(sb, item);
+            sb.Append("</div>");
+        }
+
+        private void GenSectionWorkItem(StringBuilder sb, Work item)
+        {
+            sb.Append("<div>");
+            sb.Append("<div>");
+            sb.Append("<span role=\"img\" aria-label=\"crown\" class=\"anticon anticon-crown\" style=\"color: rgb(255, 193, 7); margin-right: 8px;\">");
+            sb.Append("<svg viewBox=\"64 64 896 896\" focusable=\"false\" data-icon=\"crown\" width=\"1em\" height=\"1em\" fill=\"currentColor\" aria-hidden=\"true\">");
+            sb.Append(File.ReadAllText($"{assetsBasePath}\\svg.path\\crown.txt"));
+            sb.Append("</svg>");
+            sb.Append("</span>");
+            sb.Append($"<b class=\"info-name\">{item.WorkName}</b>");
+            sb.Append($"<a class=\"sub-info\" href=\"{item.VisitLink}\">{item.VisitLink}</a>");
+            sb.Append("</div>");
+            sb.Append($"<div>{item.WorkDesc}</div>");
+            sb.Append("</div>");
+        }
+
+        private void GenSectionWorkTitle(StringBuilder sb)
+        {
+            sb.Append("<div class=\"section-title\" style=\"color: rgb(47, 87, 133);\"><span class=\"title\">");
+            sb.Append(rio.TitleNameMap.WorkList);
+            sb.Append("</span><span class=\"title-addon\"></span></div>");
+        }
+
+        private void GenSectionEducation(StringBuilder sb)
+        {
+            sb.Append("<div class=\"section section section-education\">");
+            GenSectionEducationTitle(sb);
+            GenSectionEducationBody(sb);
+            sb.Append("</div>");
+        }
+
+        private void GenSectionEducationBody(StringBuilder sb)
+        {
+            sb.Append("<div class=\"section-body\">");
+            if (rio.EducationList is not null)
+                foreach(var item in rio.EducationList)
+                    GenSectionEducationItem(sb, item);
+            sb.Append("</div>");
+        }
+
+        private void GenSectionEducationItem(StringBuilder sb, Education education)
+        {
+            sb.Append("<div class=\"education-item\"><div><span><div><span>");
+            sb.Append($"<b>{education.School}</b>");
+            sb.Append("<span style=\"margin-left: 8px;\">");
+            sb.Append($"<span>{education.Major}</span>");
+            sb.Append($"<span class=\"sub-info\" style=\"margin-left: 4px;\">({education.AcademicDegree})</span>");
+            sb.Append("</span></span>");
+            sb.Append($"<span class=\"sub-info\" style=\"float: right;\">{education.BeginTime}~{education.EndTime??"至今"}</span>");
+            sb.Append("</div></div>");
+        }
+
+        private void GenSectionEducationTitle(StringBuilder sb)
+        {
+            sb.Append("<div class=\"section-title\" style=\"color: rgb(47, 87, 133);\"><span class=\"title\">");
+            sb.Append(rio.TitleNameMap.EducationList);
+            sb.Append("</span><span class=\"title-addon\"></span></div>");
         }
 
         private void GenProfile(StringBuilder sb)
