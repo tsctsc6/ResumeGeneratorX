@@ -23,7 +23,75 @@ namespace ResumeGeneratorX
             GenSectionEducation(sb);
             GenSectionWork(sb);
             GenSectionAboutMe(sb);
+            GenSectionSkill(sb);
             sb.Append("</div>");
+        }
+
+        private void GenSectionSkill(StringBuilder sb)
+        {
+            sb.Append("<div class=\"section section section-skill\">");
+            GenSectionSkillTitle(sb);
+            GenSectionSkillBody(sb);  
+            sb.Append("</div>");
+        }
+
+        private void GenSectionSkillBody(StringBuilder sb)
+        {
+            sb.Append("<div class=\"section-body\">");
+            if (rio.SkillList is not null)
+                foreach (var item in rio.SkillList)
+                    GenSectionSkillItem(sb, item);
+            sb.Append("</div>");
+        }
+
+        private void GenSectionSkillItem(StringBuilder sb, Skill item)
+        {
+            sb.Append("<div class=\"skill-item\">");
+            sb.Append("<span>");
+            sb.Append("<span role=\"img\" aria-label=\"check-circle\" class=\"anticon anticon-check-circle\" style=\"color: rgb(255, 193, 7); margin-right: 8px;\">");
+            sb.Append("<svg viewBox=\"64 64 896 896\" focusable=\"false\" data-icon=\"check-circle\" width=\"1em\" height=\"1em\" fill=\"currentColor\" aria-hidden=\"true\">");
+            sb.Append(File.ReadAllText($"{assetsBasePath}\\svg.path\\check-circle.txt"));
+            sb.Append("</svg>");
+            sb.Append("</span>");
+            if (string.IsNullOrEmpty(item.SkillDesc)) sb.Append($"{item.SkillName}");
+            else sb.Append($"{item.SkillName}: {item.SkillDesc}");
+            sb.Append("</span>");
+            sb.Append("<ul class=\"ant-rate ant-rate-disabled skill-rate\" tabindex=\"-1\" role=\"radiogroup\">");
+            byte[] statStates = new byte[5];
+            int fullStarCount = item.SkillLevel / 20;
+            for (int i = 0; i < fullStarCount; i++) statStates[i] = 2;
+            if (item.SkillLevel % 20 / 10 == 1) statStates[fullStarCount] = 1;
+            for (int i = 1; i <= 5; i++)
+            {
+                switch (statStates[i - 1])
+                {
+                    case 0: sb.Append("<li class=\"ant-rate-star ant-rate-star-zero\">"); break;
+                    case 1: sb.Append("<li class=\"ant-rate-star ant-rate-star-half\">"); break;
+                    case 2: sb.Append("<li class=\"ant-rate-star ant-rate-star-full\">"); break;
+                    default: throw new ArgumentException();
+                }
+                sb.Append($"<div role=\"radio\" aria-checked=\"true\" aria-posinset=\"{i}\" aria-setsize=\"5\" tabindex=\"-1\">");
+                sb.Append("<div class=\"ant-rate-star-first\">");
+                sb.Append("<span role=\"img\" aria-label=\"star\" class=\"anticon anticon-star\">");
+                sb.Append("<svg viewBox=\"64 64 896 896\" focusable=\"false\" data-icon=\"star\" width=\"1em\" height=\"1em\" fill=\"currentColor\" aria-hidden=\"true\">");
+                sb.Append(File.ReadAllText($"{assetsBasePath}\\svg.path\\star.txt"));
+                sb.Append("</svg></span></div>");
+                sb.Append("<div class=\"ant-rate-star-second\">");
+                sb.Append("<span role=\"img\" aria-label=\"star\" class=\"anticon anticon-star\">");
+                sb.Append("<svg viewBox=\"64 64 896 896\" focusable=\"false\" data-icon=\"star\" width=\"1em\" height=\"1em\" fill=\"currentColor\" aria-hidden=\"true\">");
+                sb.Append(File.ReadAllText($"{assetsBasePath}\\svg.path\\star.txt"));
+                sb.Append("</svg></span></div>");
+                sb.Append("</div></li>");
+            }
+            sb.Append("</ul>");
+            sb.Append("</div>");
+        }
+
+        private void GenSectionSkillTitle(StringBuilder sb)
+        {
+            sb.Append("<div class=\"section-title\" style=\"color: rgb(47, 87, 133);\"><span class=\"title\">");
+            sb.Append(rio.TitleNameMap.SkillList);
+            sb.Append("</span><span class=\"title-addon\"></span></div>");
         }
 
         private void GenSectionAboutMe(StringBuilder sb)
