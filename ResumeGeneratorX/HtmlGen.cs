@@ -33,7 +33,7 @@ namespace ResumeGeneratorX
             string s = File.ReadAllText($"{assetsBasePath}\\head2.txt");
             var s2 = FindHeight().Replace(s, (m) => (
                 $"height: {double.Parse(m.Groups[1].Value) * h / w}px"));
-            Console.WriteLine(s2);
+            //Console.WriteLine(s2);
             sb.Append(s2);
             sb.Append(File.ReadAllText($"{assetsBasePath}\\head3.txt"));
         }
