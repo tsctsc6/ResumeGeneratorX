@@ -13,7 +13,60 @@ namespace ResumeGeneratorX
             //base.GenResumeContent(sb);
             sb.Append("<div class=\"template2-resume resume-content\">");
             GenBasicInfo(sb);
+            GenMainInfo(sb);
             sb.Append("</div>");
+        }
+
+        private void GenMainInfo(StringBuilder sb)
+        {
+            sb.Append("<div class=\"main-info\">");
+            GenSectionExperience(sb);
+            sb.Append("</div>");
+        }
+
+        private void GenSectionExperience(StringBuilder sb)
+        {
+            sb.Append("<div class=\"section experience\">");
+            GenSectionExperienceTitle(sb);
+            GenSectionExperienceBody(sb);
+            sb.Append("</div>");
+        }
+
+        private void GenSectionExperienceBody(StringBuilder sb)
+        {
+            sb.Append("<div class=\"section-body\"><div class=\"section section-work-exp\">");
+            if (rio.WorkExpList is not null)
+                foreach (var item in rio.WorkExpList)
+                    GeGenSectionExperienceItem(sb, item);
+            sb.Append("</div></div>");
+        }
+
+        private void GeGenSectionExperienceItem(StringBuilder sb, WorkExp item)
+        {
+            sb.Append("<div class=\"section-item\">");
+            sb.Append("<div class=\"section-info\">");
+            sb.Append("<b class=\"info-name\">");
+            sb.Append(item.CompanyName);
+            sb.Append("<span class=\"sub-info\">");
+            sb.Append(item.DepartmentName);
+            sb.Append("</span>");
+            sb.Append("</b>");
+            sb.Append("<span class=\"info-time\">");
+            if (item.EndTime is not null) sb.Append($"{item.BeginTime}~{item.EndTime}");
+            else sb.Append($"{item.BeginTime} 至今");
+            sb.Append("</span>");
+            sb.Append("</div>");
+            sb.Append("<div class=\"work-description\">");
+            sb.Append(item.WorkDesc?.Replace("\n", "<br>"));
+            sb.Append("</div>");
+            sb.Append("</div>");
+        }
+
+        private void GenSectionExperienceTitle(StringBuilder sb)
+        {
+            sb.Append("<div class=\"section-title\" style=\"color: rgb(47, 87, 133);\"><span class=\"title\">");
+            sb.Append(rio.TitleNameMap.WorkExpList);
+            sb.Append("</span><span class=\"title-addon\"></span></div>");
         }
 
         private void GenBasicInfo(StringBuilder sb)
@@ -162,16 +215,18 @@ namespace ResumeGeneratorX
             sb.Append("</div>");
         }
 
-        private void GenSectionEducationItem(StringBuilder sb, Education education)
+        private void GenSectionEducationItem(StringBuilder sb, Education item)
         {
             sb.Append("<div class=\"education-item\"><div><span><div><span>");
-            sb.Append($"<b>{education.School}</b>");
+            sb.Append($"<b>{item.School}</b>");
             sb.Append("<span style=\"margin-left: 8px;\">");
-            sb.Append($"<span>{education.Major}</span>");
-            sb.Append($"<span class=\"sub-info\" style=\"margin-left: 4px;\">({education.AcademicDegree})</span>");
+            sb.Append($"<span>{item.Major}</span>");
+            sb.Append($"<span class=\"sub-info\" style=\"margin-left: 4px;\">({item.AcademicDegree})</span>");
             sb.Append("</span></span>");
-            sb.Append($"<span class=\"sub-info\" style=\"float: right;\">{education.BeginTime}~{education.EndTime??"至今"}</span>");
-            sb.Append("</div></div>");
+            sb.Append($"<span class=\"sub-info\" style=\"float: right;\">");
+            if (item.EndTime is not null) sb.Append($"{item.BeginTime}~{item.EndTime}");
+            else sb.Append($"{item.BeginTime} 至今");
+            sb.Append("</span></div></div>");
         }
 
         private void GenSectionEducationTitle(StringBuilder sb)
