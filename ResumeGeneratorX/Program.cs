@@ -50,6 +50,11 @@ namespace ResumeGeneratorX
             Console.WriteLine(input);
             Console.WriteLine(output);
             Console.WriteLine(template);
+            try
+            {
+
+            }
+            catch(Exception e) { Console.Error.WriteLine(e.Message); }
         }
     }
 }
