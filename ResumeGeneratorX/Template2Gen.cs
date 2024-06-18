@@ -22,7 +22,19 @@ namespace ResumeGeneratorX
             GenProfile(sb);
             GenSectionEducation(sb);
             GenSectionWork(sb);
+            GenSectionAboutMe(sb);
             sb.Append("</div>");
+        }
+
+        private void GenSectionAboutMe(StringBuilder sb)
+        {
+            if (rio.AboutMe == null) return;
+            sb.Append("<div class=\"section-title\" style=\"color: rgb(47, 87, 133);\"><span class=\"title\">");
+            sb.Append(rio.TitleNameMap.AboutMe);
+            sb.Append("</span><span class=\"title-addon\"></span></div>");
+            sb.Append("<div class=\"section-body\">");
+            sb.Append($"<div>{rio.AboutMe.AboutMeDesc}</div>");
+            sb.Append("<div></div></div></div>");
         }
 
         private void GenSectionWork(StringBuilder sb)
