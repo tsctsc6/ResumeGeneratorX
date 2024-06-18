@@ -1,5 +1,6 @@
 ﻿using System.CommandLine;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq.Expressions;
 using System.Text.Json;
 
 namespace ResumeGeneratorX
@@ -49,16 +50,21 @@ namespace ResumeGeneratorX
 
         static void Main2(FileInfo input, DirectoryInfo output, int template)
         {
-            Console.WriteLine(input);
-            Console.WriteLine(output);
-            Console.WriteLine(template);
             try
             {
                 ResumeInfo? rio = JsonSerializer.Deserialize<ResumeInfo>(File.ReadAllText(input.FullName));
                 ArgumentNullException.ThrowIfNull(rio);
-                Template2Gen htmlGen = new(rio);
+                HtmlGenBase htmlGen = template switch
+                {
+                    1 => new Template2Gen(rio),
+                    2 => new Template2Gen(rio),
+                    3 => new Template2Gen(rio),
+                    _ => throw new ArgumentOutOfRangeException($"There is no template {template}."),
+                };
                 var s = htmlGen.GenHtml();
-                File.WriteAllText($"{output.FullName}\\{Path.GetFileNameWithoutExtension(input.Name)}.html", s.ToString());
+                var outputFile = $"{output.FullName}\\{Path.GetFileNameWithoutExtension(input.Name)}.html";
+                File.WriteAllText(outputFile, s.ToString());
+                Console.WriteLine($"Output at \"{outputFile}\"");
             }
             catch(Exception e) { Console.Error.WriteLine(e.Message); }
         }
