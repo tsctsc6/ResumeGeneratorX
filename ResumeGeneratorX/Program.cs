@@ -1,4 +1,6 @@
 ﻿using System.CommandLine;
+using System.Diagnostics.CodeAnalysis;
+using System.Text.Json;
 
 namespace ResumeGeneratorX
 {
@@ -52,7 +54,8 @@ namespace ResumeGeneratorX
             Console.WriteLine(template);
             try
             {
-
+                ResumeInfo? rio = JsonSerializer.Deserialize<ResumeInfo>(File.ReadAllText(input.FullName));
+                
             }
             catch(Exception e) { Console.Error.WriteLine(e.Message); }
         }
