@@ -138,10 +138,51 @@ namespace ResumeGeneratorX
             sb.Append("<div class=\"basic-info\">");
             GenProfile(sb);
             GenSectionEducation(sb);
+            GenSectionAward(sb);
             GenSectionWork(sb);
             GenSectionAboutMe(sb);
             GenSectionSkill(sb);
             sb.Append("</div>");
+        }
+
+        private void GenSectionAward(StringBuilder sb)
+        {
+            if (rio.AwardList == null) return;
+            sb.Append("<div class=\"section section section-award\">");
+            GenSectionAwardTitle(sb);
+            GenSectionAwardBody(sb);
+            sb.Append("</div>");
+        }
+
+        private void GenSectionAwardBody(StringBuilder sb)
+        {
+            sb.Append("<div class=\"section-body\">");
+            if (rio.AwardList is not null)
+                foreach (var item in rio.AwardList)
+                    GenSectionAwardItem(sb, item);
+            sb.Append("</div>");
+        }
+
+        private void GenSectionAwardItem(StringBuilder sb, Award item)
+        {
+            sb.Append("<div class=\"section-item\">");
+            sb.Append("<div class=\"section-info\">");
+            sb.Append("<b class=\"info-name\">");
+            sb.Append(item.AwardInfo);
+            sb.Append("</b>");
+            sb.Append("<span class=\"info-time\">");
+            sb.Append(item.AwardTime);
+            sb.Append("</span>");
+            sb.Append("</div>");
+            sb.Append("</div>");
+        }
+
+        private void GenSectionAwardTitle(StringBuilder sb)
+        {
+            sb.Append("<div class=\"section-title\" style=\"color: rgb(47, 87, 133);\">");
+            sb.Append("<span class=\"title\">");
+            sb.Append(rio.TitleNameMap.AwardList);
+            sb.Append("</span><span class=\"title-addon\"></span></div>");
         }
 
         private void GenSectionSkill(StringBuilder sb)
