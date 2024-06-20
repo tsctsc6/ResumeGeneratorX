@@ -27,24 +27,25 @@ namespace ResumeGeneratorX
 
         private void GenSectionProject(StringBuilder sb)
         {
+            if (rio.ProjectList is null) return;
             sb.Append("<div class=\"section project\">");
             GenSectionProjecTitle(sb);
-            GenSectionProjecBody(sb);
+            GenSectionProjectBody(sb);
             sb.Append("</div>");
         }
 
-        private void GenSectionProjecBody(StringBuilder sb)
+        private void GenSectionProjectBody(StringBuilder sb)
         {
             sb.Append("<div class=\"section-body\">");
             sb.Append("<div class=\"section section-project\">");
             if (rio.ProjectList is not null)
                 foreach (var item in rio.ProjectList)
-                    GenSectionProjecItem(sb, item);
+                    GenSectionProjectItem(sb, item);
             sb.Append("</div>");
             sb.Append("</div>");
         }
 
-        private void GenSectionProjecItem(StringBuilder sb, Project item)
+        private void GenSectionProjectItem(StringBuilder sb, Project item)
         {
             sb.Append("<div class=\"section-item\">");
             sb.Append("<div class=\"section-info\">");
@@ -87,6 +88,7 @@ namespace ResumeGeneratorX
 
         private void GenSectionExperience(StringBuilder sb)
         {
+            if (rio.WorkExpList is null) return;
             sb.Append("<div class=\"section experience\">");
             GenSectionExperienceTitle(sb);
             GenSectionExperienceBody(sb);
@@ -144,6 +146,7 @@ namespace ResumeGeneratorX
 
         private void GenSectionSkill(StringBuilder sb)
         {
+            if (rio.SkillList is null) return;
             sb.Append("<div class=\"section section section-skill\">");
             GenSectionSkillTitle(sb);
             GenSectionSkillBody(sb);  
@@ -224,6 +227,7 @@ namespace ResumeGeneratorX
 
         private void GenSectionWork(StringBuilder sb)
         {
+            if (rio.WorkList is null) return;
             sb.Append("<div class=\"section section section-work\">");
             GenSectionWorkTitle(sb);
             GenSectionWorkBody(sb);
@@ -265,6 +269,7 @@ namespace ResumeGeneratorX
 
         private void GenSectionEducation(StringBuilder sb)
         {
+            if (rio.EducationList is null) return;
             sb.Append("<div class=\"section section section-education\">");
             GenSectionEducationTitle(sb);
             GenSectionEducationBody(sb);
@@ -347,6 +352,7 @@ namespace ResumeGeneratorX
 
         private void GenExpectJob(StringBuilder sb)
         {
+            if (rio.Profile.PositionTitle == null) return;
             sb.Append("<div class=\"expect-job\">");
             sb.Append("<span role=\"img\" aria-label=\"heart\" class=\"anticon anticon-heart\" style=\"color: rgb(47, 87, 133); opacity: 0.85;\">");
             sb.Append("<svg viewBox=\"64 64 896 896\" focusable=\"false\" data-icon=\"heart\" width=\"1em\" height=\"1em\" fill=\"currentColor\" aria-hidden=\"true\">");
@@ -356,6 +362,7 @@ namespace ResumeGeneratorX
 
         private void GenWorkPlace(StringBuilder sb)
         {
+            if (rio.Profile.WorkPlace == null) return;
             sb.Append("<div class=\"work-place\">");
             sb.Append("<span role=\"img\" aria-label=\"environment\" class=\"anticon anticon-environment\" style=\"color: rgb(47, 87, 133); opacity: 0.85;\">");
             sb.Append("<svg viewBox=\"64 64 896 896\" focusable=\"false\" data-icon=\"environment\" width=\"1em\" height=\"1em\" fill=\"currentColor\" aria-hidden=\"true\">");
@@ -365,6 +372,7 @@ namespace ResumeGeneratorX
 
         private void GenZhihu(StringBuilder sb)
         {
+            if (rio.Profile.Zhihu == null) return;
             sb.Append("<div class=\"zhihu\">");
             sb.Append("<span role=\"img\" aria-label=\"zhihu-circle\" class=\"anticon anticon-zhihu-circle\" style=\"color: rgb(47, 87, 133); opacity: 0.85;\">");
             sb.Append("<svg viewBox=\"64 64 896 896\" focusable=\"false\" data-icon=\"zhihu-circle\" width=\"1em\" height=\"1em\" fill=\"currentColor\" aria-hidden=\"true\">");
@@ -374,6 +382,7 @@ namespace ResumeGeneratorX
 
         private void GenGithub(StringBuilder sb)
         {
+            if (rio.Profile.Github == null) return;
             sb.Append("<div class=\"github\">");
             sb.Append("<span role=\"img\" aria-label=\"github\" class=\"anticon anticon-github\" style=\"color: rgb(47, 87, 133); opacity: 0.85;\">");
             sb.Append("<svg viewBox=\"64 64 896 896\" focusable=\"false\" data-icon=\"github\" width=\"1em\" height=\"1em\" fill=\"currentColor\" aria-hidden=\"true\">");
@@ -383,6 +392,7 @@ namespace ResumeGeneratorX
 
         private void GenEmail(StringBuilder sb)
         {
+            if (rio.Profile.Email == null) return;
             sb.Append("<div class=\"email\">");
             sb.Append("<span role=\"img\" aria-label=\"mail\" class=\"anticon anticon-mail\" style=\"color: rgb(47, 87, 133); opacity: 0.85;\">");
             sb.Append("<svg viewBox=\"64 64 896 896\" focusable=\"false\" data-icon=\"mail\" width=\"1em\" height=\"1em\" fill=\"currentColor\" aria-hidden=\"true\">");
@@ -392,6 +402,7 @@ namespace ResumeGeneratorX
 
         private void GenMobile(StringBuilder sb)
         {
+            if (rio.Profile.Mobile == null) return;
             sb.Append("<div class=\"mobile\">");
             sb.Append("<span role=\"img\" aria-label=\"phone\" class=\"anticon anticon-phone\" style=\"color: rgb(47, 87, 133); opacity: 0.85;\">");
             sb.Append("<svg viewBox=\"64 64 896 896\" focusable=\"false\" data-icon=\"phone\" width=\"1em\" height=\"1em\" fill=\"currentColor\" aria-hidden=\"true\">");
