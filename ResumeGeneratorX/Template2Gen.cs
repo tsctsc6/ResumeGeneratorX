@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Buffers;
+using System.Text;
 
 namespace ResumeGeneratorX
 {
@@ -165,15 +166,18 @@ namespace ResumeGeneratorX
 
         private void GenSectionAwardItem(StringBuilder sb, Award item)
         {
-            sb.Append("<div class=\"section-item\">");
-            sb.Append("<div class=\"section-info\">");
-            sb.Append("<b class=\"info-name\">");
-            sb.Append(item.AwardInfo);
-            sb.Append("</b>");
-            sb.Append("<span class=\"info-time\">");
+            sb.Append("<div class=\"award-item\">");
+            sb.Append("<span role=\"img\" aria-label=\"trophy\" class=\"anticon anticon-trophy\" style=\"color: rgb(255, 193, 7); margin-right: 8px;\">");
+            sb.Append("<svg viewBox=\"64 64 896 896\" focusable=\"false\" data-icon=\"trophy\" width=\"1em\" height=\"1em\" fill=\"currentColor\" aria-hidden=\"true\">");
+            sb.Append(File.ReadAllText($"{assetsBasePath}\\svg.path\\trophy.txt"));
+            sb.Append("</svg>");
+            sb.Append("</span>");
+            sb.Append($"<b class=\"info-name\">");
+            sb.Append($"{item.AwardInfo}");
+            sb.Append("<span class=\"sub-info award-time\" style=\"color:rgba(0, 0, 0, .45);font-size:12px;margin-left:8px;font-weight:300;\">");
             sb.Append(item.AwardTime);
             sb.Append("</span>");
-            sb.Append("</div>");
+            sb.Append($"</b>");
             sb.Append("</div>");
         }
 
