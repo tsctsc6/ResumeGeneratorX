@@ -11,6 +11,7 @@ namespace ResumeGeneratorX
         protected override void GenResumeContent(StringBuilder sb)
         {
             throw new NotImplementedException();
+            a
         }
     }
 }
