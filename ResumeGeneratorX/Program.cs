@@ -57,9 +57,9 @@ namespace ResumeGeneratorX
                 ArgumentNullException.ThrowIfNull(rio);
                 HtmlGenBase htmlGen = template switch
                 {
-                    1 => new Template2Gen(rio),
+                    1 => new Template1Gen(rio),
                     2 => new Template2Gen(rio),
-                    3 => new Template2Gen(rio),
+                    3 => new Template3Gen(rio),
                     _ => throw new ArgumentOutOfRangeException($"There is no template {template}."),
                 };
                 var s = htmlGen.GenHtml();
