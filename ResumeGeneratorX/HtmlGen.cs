@@ -7,6 +7,7 @@ namespace ResumeGeneratorX
     {
         protected const string assetsBasePath = @".\Assets";
         protected readonly ResumeInfo rio;
+        protected int template = 0;
 
         public HtmlGenBase(ResumeInfo rio)
         {
@@ -24,18 +25,32 @@ namespace ResumeGeneratorX
         }
         protected void GenHead(StringBuilder sb)
         {
-            sb.Append(File.ReadAllText($"{assetsBasePath}\\head1.txt"));
+            sb.Append("<head><meta charset=\"utf-8\"><meta http-equiv=\"x-ua-compatible\" content=\"ie=edge\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\"><title>Resume Generator</title>");
+            sb.Append("<style rc-util-key=\"@ant-design-icons\">");
+            sb.Append(File.ReadAllText($"{assetsBasePath}\\head1.css"));
+            sb.Append("</style>");
+            sb.Append("<style id=\"gatsby-global-css\">");
+            sb.Append(File.ReadAllText($"{assetsBasePath}\\head2.css"));
+            sb.Append(File.ReadAllText($"{assetsBasePath}\\head_template{template}.css"));
+            GenAvatar(sb);
+            sb.Append(File.ReadAllText($"{assetsBasePath}\\head3.css"));
+            sb.Append("</style>");
+            sb.Append("<style id=\"dynamic\">");
+            sb.Append(File.ReadAllText($"{assetsBasePath}\\head4.css"));
+            sb.Append("</style>");
+        }
+        protected void GenAvatar(StringBuilder sb)
+        {
             // 查看头像比例（宽x高）
             var sizeStrings = rio.Avatar.Size.Split('x');
             double w = double.Parse(sizeStrings[0]);
             double h = double.Parse(sizeStrings[1]);
             // 修改头像高宽比例
-            string s = File.ReadAllText($"{assetsBasePath}\\head2.txt");
+            string s = File.ReadAllText($"{assetsBasePath}\\head_template2_avatar.css");
             var s2 = FindHeight().Replace(s, (m) => (
                 $"height: {double.Parse(m.Groups[1].Value) * h / w}px"));
             //Console.WriteLine(s2);
             sb.Append(s2);
-            sb.Append(File.ReadAllText($"{assetsBasePath}\\head3.txt"));
         }
         protected void GenBody(StringBuilder sb)
         {

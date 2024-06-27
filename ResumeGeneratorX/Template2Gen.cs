@@ -7,6 +7,7 @@ namespace ResumeGeneratorX
     {
         public Template2Gen(ResumeInfo rio) : base(rio)
         {
+            template = 2;
         }
 
         protected override void GenResumeContent(StringBuilder sb)
