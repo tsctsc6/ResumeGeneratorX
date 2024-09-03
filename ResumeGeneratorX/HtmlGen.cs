@@ -25,7 +25,7 @@ namespace ResumeGeneratorX
         }
         protected void GenHead(StringBuilder sb)
         {
-            sb.Append("<head><meta charset=\"utf-8\"><meta http-equiv=\"x-ua-compatible\" content=\"ie=edge\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\"><title>Resume Generator</title>");
+            sb.Append($"<head><meta charset=\"utf-8\"><meta http-equiv=\"x-ua-compatible\" content=\"ie=edge\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\"><title>{rio.Title}</title>");
             sb.Append("<style rc-util-key=\"@ant-design-icons\">");
             sb.Append(File.ReadAllText($"{assetsBasePath}\\head1.css"));
             sb.Append("</style>");

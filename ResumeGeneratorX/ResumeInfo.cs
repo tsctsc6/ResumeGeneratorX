@@ -3,6 +3,7 @@
 
     public class ResumeInfo
     {
+        public string Title { get; set; } = "Resume";
         public TitleNameMap TitleNameMap { get; set; } = new();
         public Avatar Avatar { get; set; } = new();
         public Profile Profile { get; set; } = new();

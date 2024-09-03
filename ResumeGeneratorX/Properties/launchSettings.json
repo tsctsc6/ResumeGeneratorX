@@ -2,7 +2,7 @@
   "profiles": {
     "ResumeGeneratorX": {
       "commandName": "Project",
-      "commandLineArgs": "-i .\\Assets\\example.json"
+      "commandLineArgs": "-i \"E:\\Files\\就业\\resume.json\""
     }
   }
 }
