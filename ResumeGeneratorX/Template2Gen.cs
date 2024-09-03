@@ -1,4 +1,5 @@
 ﻿using System.Buffers;
+using System.Linq;
 using System.Text;
 
 namespace ResumeGeneratorX
@@ -22,8 +23,16 @@ namespace ResumeGeneratorX
         private void GenMainInfo(StringBuilder sb)
         {
             sb.Append("<div class=\"main-info\">");
-            GenSectionExperience(sb);
-            GenSectionProject(sb);
+            var ps = rio.MainInfoOrder.GetType().GetProperties()
+                .OrderBy(p => p.GetValue(rio.MainInfoOrder)).ToArray();
+            foreach(var p in ps)
+            {
+                switch (p.Name)
+                {
+                    case "Experience": GenSectionExperience(sb); break;
+                    case "Project": GenSectionProject(sb); break;
+                }
+            }
             sb.Append("</div>");
         }
 
@@ -103,11 +112,11 @@ namespace ResumeGeneratorX
             sb.Append("<div class=\"section section-work-exp\">");
             if (rio.WorkExpList is not null)
                 foreach (var item in rio.WorkExpList)
-                    GeGenSectionExperienceItem(sb, item);
+                    GenSectionExperienceItem(sb, item);
             sb.Append("</div></div>");
         }
 
-        private void GeGenSectionExperienceItem(StringBuilder sb, WorkExp item)
+        private void GenSectionExperienceItem(StringBuilder sb, WorkExp item)
         {
             sb.Append("<div class=\"section-item\">");
             sb.Append("<div class=\"section-info\">");
@@ -138,12 +147,21 @@ namespace ResumeGeneratorX
         private void GenBasicInfo(StringBuilder sb)
         {
             sb.Append("<div class=\"basic-info\">");
-            GenProfile(sb);
-            GenSectionEducation(sb);
-            GenSectionAward(sb);
-            GenSectionWork(sb);
-            GenSectionAboutMe(sb);
-            GenSectionSkill(sb);
+            var ps = rio.BasicInfoOrder.GetType().GetProperties()
+                .OrderBy(p => p.GetValue(rio.BasicInfoOrder)).ToArray();
+            foreach (var p in ps)
+            {
+                switch (p.Name)
+                {
+                    case "Profile": GenSectionProfile(sb); break;
+                    case "Education": GenSectionEducation(sb); break;
+                    case "Award": GenSectionAward(sb); break;
+                    case "Work": GenSectionWork(sb); break;
+                    case "AboutMe": GenSectionAboutMe(sb); break;
+                    case "Skill": GenSectionSkill(sb); break;
+                    default: throw new ArgumentException();
+                }
+            }
             sb.Append("</div>");
         }
 
@@ -353,7 +371,7 @@ namespace ResumeGeneratorX
             sb.Append("</span><span class=\"title-addon\"></span></div>");
         }
 
-        private void GenProfile(StringBuilder sb)
+        private void GenSectionProfile(StringBuilder sb)
         {
             sb.Append("<div class=\"profile\">");
             GenProfileInfo(sb);
@@ -361,7 +379,7 @@ namespace ResumeGeneratorX
             sb.Append("</div>");
         }
 
-        private void GenAvatar(StringBuilder sb)
+        private new void GenAvatar(StringBuilder sb)
         {
             sb.Append("<div class=\"avatar \">");
             sb.Append("<span class=\"ant-avatar ant-avatar-square ant-avatar-image avatar\">");

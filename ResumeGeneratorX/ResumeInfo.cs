@@ -5,6 +5,8 @@
     {
         public string Title { get; set; } = "Resume";
         public TitleNameMap TitleNameMap { get; set; } = new();
+        public BasicInfoOrder BasicInfoOrder { get; set; } = new();
+        public MainInfoOrder MainInfoOrder { get; set; } = new();
         public Avatar Avatar { get; set; } = new();
         public Profile Profile { get; set; } = new();
         public Education[]? EducationList { get; set; }
@@ -26,6 +28,22 @@
         public string AwardList { get; set; } = "更多信息";
         public string WorkList { get; set; } = "个人作品";
         public string AboutMe { get; set; } = "自我介绍";
+    }
+
+    public class BasicInfoOrder
+    {
+        public int Profile { get; set; } = 0;
+        public int Education { get; set; } = 1;
+        public int Skill { get; set; } = 2;
+        public int Work { get; set; } = 3;
+        public int Award { get; set; } = 4;
+        public int AboutMe { get; set; } = 5;
+    }
+
+    public class MainInfoOrder
+    {
+        public int Experience { get; set; } = 0;
+        public int Project { get; set; } = 1;
     }
 
     public class Avatar
