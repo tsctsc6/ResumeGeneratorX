@@ -383,7 +383,9 @@ namespace ResumeGeneratorX
         {
             sb.Append("<div class=\"avatar \">");
             sb.Append("<span class=\"ant-avatar ant-avatar-square ant-avatar-image avatar\">");
-            sb.Append($"<img src=\"{rio.Avatar.Src}\">");
+            var extension = Path.GetExtension(rio.Avatar.Src);
+            var avatarBase64 = Convert.ToBase64String(File.ReadAllBytes(rio.Avatar.Src));
+            sb.Append($"<img src=\"data:image/{extension};base64,{avatarBase64}\">");
             sb.Append("</span></div>");
         }
 

@@ -83,7 +83,7 @@ namespace ResumeGeneratorX
                     var browser = await playwright.Chromium.LaunchAsync(
                         new BrowserTypeLaunchOptions
                         {
-                            Headless = false
+                            Headless = true
                         });
                     var page = await browser.NewPageAsync();
                     await page.SetContentAsync(s.ToString());
@@ -92,7 +92,7 @@ namespace ResumeGeneratorX
                         Format = "A4",
                         Path = $"{output.FullName}\\{Path.GetFileNameWithoutExtension(input.Name)}.pdf"
                     });
-                    await Console.In.ReadLineAsync();
+                    //await Console.In.ReadLineAsync();
                     await page.CloseAsync();
                     isSuccess = true;
                 }
