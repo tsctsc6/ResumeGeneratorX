@@ -1,6 +1,6 @@
-﻿using System.CommandLine;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq.Expressions;
+﻿using Microsoft.Playwright;
+using System.CommandLine;
+using System.Text;
 using System.Text.Json;
 
 namespace ResumeGeneratorX
@@ -35,7 +35,7 @@ namespace ResumeGeneratorX
             rootCommand.AddOption(outputDirectoryOption);
             rootCommand.AddOption(templateOption);
 
-            rootCommand.SetHandler((input, output, template) =>
+            rootCommand.SetHandler(async (input, output, template) =>
             {
                 if (input is null) return;
                 if (!File.Exists(input.FullName))
@@ -43,13 +43,13 @@ namespace ResumeGeneratorX
                     Console.Error.WriteLine($"Input file \"{input.FullName}\" does not exist.");
                     return;
                 }
-                Main2(input, output ?? input.Directory!, template ?? 2);
+                await Main2(input, output ?? input.Directory!, template ?? 2);
             }, inputFileOption, outputDirectoryOption, templateOption);
 
             return await rootCommand.InvokeAsync(args);
         }
 
-        static void Main2(FileInfo input, DirectoryInfo output, int template)
+        static async Task Main2(FileInfo input, DirectoryInfo output, int template)
         {
             try
             {
@@ -65,9 +65,45 @@ namespace ResumeGeneratorX
                 var s = htmlGen.GenHtml();
                 var outputFile = $"{output.FullName}\\{Path.GetFileNameWithoutExtension(input.Name)}.html";
                 File.WriteAllText(outputFile, s.ToString());
+                await GenPdf(input, output, s);
+
                 Console.WriteLine($"Output at \"{outputFile}\"");
             }
-            catch(Exception e) { Console.Error.WriteLine(e.Message); }
+            catch (Exception e) { Console.Error.WriteLine(e.Message); }
+        }
+
+        private static async Task GenPdf(FileInfo input, DirectoryInfo output, StringBuilder s)
+        {
+            bool isSuccess = false;
+            while (!isSuccess)
+            {
+                try
+                {
+                    using var playwright = await Playwright.CreateAsync();
+                    var browser = await playwright.Chromium.LaunchAsync(
+                        new BrowserTypeLaunchOptions
+                        {
+                            Headless = false
+                        });
+                    var page = await browser.NewPageAsync();
+                    await page.SetContentAsync(s.ToString());
+                    await page.PdfAsync(new PagePdfOptions
+                    {
+                        Format = "A4",
+                        Path = $"{output.FullName}\\{Path.GetFileNameWithoutExtension(input.Name)}.pdf"
+                    });
+                    await Console.In.ReadLineAsync();
+                    await page.CloseAsync();
+                    isSuccess = true;
+                }
+                catch (PlaywrightException e)
+                {
+                    if (!e.Message.Contains("install")) throw;
+                    Console.Error.WriteLine(e.Message);
+                    Microsoft.Playwright.Program.Main(["install"]);
+                    Console.WriteLine("Install complete");
+                } 
+            }
         }
     }
 }
