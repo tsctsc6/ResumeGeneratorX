@@ -1,4 +1,5 @@
 {
+    "Title": "your resume",
     "TitleNameMap": {
         "EducationList": "教育背景",
         "WorkExpList": "工作经历",
@@ -9,7 +10,7 @@
         "AboutMe": "自我介绍"
     },
     "Avatar": {
-        "Src": "file://C:/Users/ASUS/Desktop/a.png",
+        "Src": "C:/Users/ASUS/Desktop/a.png",
         "IsHidden": false,
         "Size": "5x7"
     },
