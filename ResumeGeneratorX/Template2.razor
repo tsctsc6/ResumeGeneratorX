@@ -20675,7 +20675,7 @@
             margin: 0 auto;
             display: block;
             width: 84px;
-            height: 84px
+            height: @AssetsPath.GetImgSize(ResumeInfo.Avatar.Size)px
         }
 
         .ant-badge {
@@ -22931,18 +22931,96 @@
                                     <div class="profile-info">
                                         <div class="name">@ResumeInfo.Profile.Name</div>
                                         <div class="profile-list">
-                                            <div class="mobile">
-                                                <span role="img" aria-label="phone" 
-                                                    class="anticon anticon-phone"
-                                                    style="color: rgb(47, 87, 133); opacity: 0.85;">
-                                                    <svg viewBox="64 64 896 896" focusable="false" data-icon="phone"
-                                                         width="1em" height="1em" fill="currentColor" aria-hidden="true">
-                                                        <path d=@AssetsPath.MobileSvgPath></path>
-                                                    </svg>
+                                            @if (ResumeInfo.Profile.Mobile is not null)
+                                            {
+                                                <div class="mobile">
+                                                    <span role="img" aria-label="phone"
+                                                          class="anticon anticon-phone"
+                                                          style="color: rgb(47, 87, 133); opacity: 0.85;">
+                                                        <svg viewBox="64 64 896 896" focusable="false" data-icon="phone"
+                                                             width="1em" height="1em" fill="currentColor" aria-hidden="true">
+                                                            <path d=@AssetsPath.GetSvgPath("mobile")></path>
+                                                        </svg>
                                                     </span>
                                                     @ResumeInfo.Profile.Mobile
-                                            </div>
+                                                </div>
+                                            }
+                                            @if (ResumeInfo.Profile.Email is not null)
+                                            {
+                                                <div class="email">
+                                                    <span role="img" aria-label="mail"
+                                                          class="anticon anticon-mail"
+                                                          style="color: rgb(47, 87, 133); opacity: 0.85;">
+                                                        <svg viewBox="64 64 896 896" focusable="false" data-icon="mail"
+                                                             width="1em" height="1em" fill="currentColor" aria-hidden="true">
+                                                            <path d=@AssetsPath.GetSvgPath("mail")></path>
+                                                        </svg>
+                                                    </span>
+                                                    @ResumeInfo.Profile.Email
+                                                </div>
+                                            }
+                                            @if (ResumeInfo.Profile.Github is not null)
+                                            {
+                                                <div class="github">
+                                                    <span role="img" aria-label="github"
+                                                          class="anticon anticon-github"
+                                                          style="color: rgb(47, 87, 133); opacity: 0.85;">
+                                                        <svg viewBox="64 64 896 896" focusable="false" data-icon="github"
+                                                             width="1em" height="1em" fill="currentColor" aria-hidden="true">
+                                                            <path d=@AssetsPath.GetSvgPath("github")></path>
+                                                        </svg>
+                                                    </span>
+                                                    @ResumeInfo.Profile.Github
+                                                </div>
+                                            }
+                                            @if (ResumeInfo.Profile.Zhihu is not null)
+                                            {
+                                                <div class="zhihu">
+                                                    <span role="img" aria-label="zhihu-circle"
+                                                          class="anticon anticon-zhihu-circle"
+                                                          style="color: rgb(47, 87, 133); opacity: 0.85;">
+                                                        <svg viewBox="64 64 896 896" focusable="false" data-icon="zhihu-circle"
+                                                             width="1em" height="1em" fill="currentColor" aria-hidden="true">
+                                                            <path d=@AssetsPath.GetSvgPath("zhihu-circle")></path>
+                                                        </svg>
+                                                    </span>
+                                                    @ResumeInfo.Profile.Zhihu
+                                                </div>
+                                            }
+                                            @if (ResumeInfo.Profile.WorkPlace is not null)
+                                            {
+                                                <div class="work-place">
+                                                    <span role="img" aria-label="environment"
+                                                          class="anticon anticon-environment"
+                                                          style="color: rgb(47, 87, 133); opacity: 0.85;">
+                                                        <svg viewBox="64 64 896 896" focusable="false" data-icon="environment"
+                                                             width="1em" height="1em" fill="currentColor" aria-hidden="true">
+                                                            <path d=@AssetsPath.GetSvgPath("environment")></path>
+                                                        </svg>
+                                                    </span>
+                                                    @ResumeInfo.Profile.WorkPlace
+                                                </div>
+                                            }
+                                            @if (ResumeInfo.Profile.PositionTitle is not null)
+                                            {
+                                                <div class="expect-job">
+                                                    <span role="img" aria-label="heart"
+                                                          class="anticon anticon-heart"
+                                                          style="color: rgb(47, 87, 133); opacity: 0.85;">
+                                                        <svg viewBox="64 64 896 896" focusable="false" data-icon="heart"
+                                                             width="1em" height="1em" fill="currentColor" aria-hidden="true">
+                                                            <path d=@AssetsPath.GetSvgPath("heart")></path>
+                                                        </svg>
+                                                    </span>
+                                                    @ResumeInfo.Profile.PositionTitle
+                                                </div>
+                                            }
                                         </div>
+                                    </div>
+                                    <div class="avatar">
+                                        <span class="ant-avatar ant-avatar-square ant-avatar-image avatar">
+                                            <img alt="avatar" src=@AssetsPath.ImgToBase64(ResumeInfo.Avatar.Src)>
+                                        </span>
                                     </div>
                                 </div>
                             </div>
