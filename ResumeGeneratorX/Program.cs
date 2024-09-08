@@ -63,16 +63,18 @@ namespace ResumeGeneratorX
                     _ => throw new ArgumentOutOfRangeException($"There is no template {template}."),
                 };
                 var s = htmlGen.GenHtml();
-                var outputFile = $"{output.FullName}\\{Path.GetFileNameWithoutExtension(input.Name)}.html";
-                File.WriteAllText(outputFile, s.ToString());
-                await GenPdf(input, output, s);
+                var outputHtmlFilePath = Path.Combine(output.FullName, rio.Title + ".html");
+                File.WriteAllText(outputHtmlFilePath, s.ToString());
+                Console.WriteLine($"Output at \"{outputHtmlFilePath}\"");
 
-                Console.WriteLine($"Output at \"{outputFile}\"");
+                var outputPdfFilePath = Path.Combine(output.FullName, rio.Title + ".pdf");
+                await GenPdf(outputPdfFilePath, s);
+                Console.WriteLine($"Output at \"{outputPdfFilePath}\"");
             }
             catch (Exception e) { Console.Error.WriteLine(e.Message); }
         }
 
-        private static async Task GenPdf(FileInfo input, DirectoryInfo output, StringBuilder s)
+        private static async Task GenPdf(string outputPdfFilePath, StringBuilder s)
         {
             bool isSuccess = false;
             while (!isSuccess)
@@ -83,14 +85,15 @@ namespace ResumeGeneratorX
                     var browser = await playwright.Chromium.LaunchAsync(
                         new BrowserTypeLaunchOptions
                         {
-                            Headless = true
+                            Headless = true,
+                            Channel = "msedge"
                         });
                     var page = await browser.NewPageAsync();
                     await page.SetContentAsync(s.ToString());
                     await page.PdfAsync(new PagePdfOptions
                     {
                         Format = "A4",
-                        Path = $"{output.FullName}\\{Path.GetFileNameWithoutExtension(input.Name)}.pdf"
+                        Path = outputPdfFilePath
                     });
                     //await Console.In.ReadLineAsync();
                     await page.CloseAsync();
