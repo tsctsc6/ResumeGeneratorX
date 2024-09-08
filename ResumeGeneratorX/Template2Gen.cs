@@ -317,7 +317,7 @@ namespace ResumeGeneratorX
             sb.Append("</svg>");
             sb.Append("</span>");
             sb.Append($"<b class=\"info-name\">{item.WorkName}</b>");
-            sb.Append($"<a class=\"sub-info\" href=\"{item.VisitLink}\">{item.VisitLink}</a>");
+            sb.Append($"<a class=\"sub-info\" href=\"{item.WorkLink}\">{item.WorkLink}</a>");
             sb.Append("</div>");
             sb.Append($"<div>{item.WorkDesc}</div>");
             sb.Append("</div>");
