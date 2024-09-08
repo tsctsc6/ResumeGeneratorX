@@ -1,22 +1,26 @@
 {
+    "Title": "Your resume",
     "TitleNameMap": {
         "EducationList": "教育背景",
         "WorkExpList": "工作经历",
         "ProjectList": "项目经历",
         "SkillList": "个人技能",
-        "AwardList": "个人奖项",
+        "AwardList": "更多信息",
         "WorkList": "个人作品",
         "AboutMe": "自我介绍"
     },
     "Avatar": {
-        "Src": "file://C:/Users/ASUS/Desktop/a.png",
+        "Src": "https://avatars.githubusercontent.com/u/93368014?v=4",
         "IsHidden": false,
-        "Size": "5x7"
+        "Shape": "square",
+        "Size": "1x1"
     },
     "Profile": {
         "Name": "姓名",
         "Email": "736****86@qq.com",
         "Mobile": "156********",
+        "Github": "https://github.com/visiky",
+        "Zhihu": "https://zhihu.com/people/visiky",
         "WorkExpYear": "",
         "WorkPlace": "浙江杭州",
         "PositionTitle": "前端工程师"
@@ -48,6 +52,29 @@
             "AwardTime": "2021.07"
         }
     ],
+    "WorkExpList": [
+        {
+            "CompanyName": "蚂蚁集团",
+            "DepartmentName": "体验技术部",
+            "BeginTime": "2018.06",
+            "EndTime": null,
+            "WorkDesc": "1. 担任蚂蚁高管决策和管理协同产品 “数据作战室” 的前端负责人\r\n2. 负责蚂蚁敏捷 BI 产品 “DeepInsight” 的可视分析模块产品能力建设\n3. 数据可视化 AntV 团队核心成员，负责 G2、G2Plot 开源技术的建设"
+        },
+        {
+            "CompanyName": "蚂蚁金服",
+            "DepartmentName": "大数据部",
+            "BeginTime": "2017.06",
+            "EndTime": "2017.12",
+            "WorkDesc": "前端实习生。使用 React 参与开发多类产品：数据研发平台、数据决策平台、数据分析平台的研发工作，同时也参与大型 BI 产品的重构工作，有良好的编码习惯。"
+        },
+        {
+            "CompanyName": "数沃信息科技有限公司",
+            "DepartmentName": "",
+            "BeginTime": "2017.03",
+            "EndTime": "2017.05",
+            "WorkDesc": "前端实习生。使用 Vue 来实现平台功能和逻辑，再用 ECharts 来对数据挖掘分析后的可视化结果进行展示"
+        }
+    ],
     "SkillList": [
         {
             "SkillName": "HTML 和 CSS",
@@ -65,8 +92,8 @@
         },
         {
             "SkillName": "React / 前端工程化",
-            "SkillDesc": "大型前端项目经验以及组件库开发经验，大型前端项目经验以及组件库开发经验，大型前端项目经验以及组件库开发经验，大型前端项目经验以及组件库开发经验",
-            "SkillLevel": 20
+            "SkillDesc": "大型前端项目经验以及组件库开发经验",
+            "SkillLevel": 80
         }
     ],
     "ProjectList": [
@@ -96,7 +123,8 @@
         {
             "WorkName": "a",
             "WorkDesc": "aa",
-            "VisitLink": "aaa"
+            "WorkLink": "aaa",
+            "LinkText": "aaa"
         }
     ],
     "AboutMe": {
