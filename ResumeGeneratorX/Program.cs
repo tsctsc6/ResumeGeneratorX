@@ -4,7 +4,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Playwright;
 using System.CommandLine;
-using System.Text;
 using System.Text.Json;
 
 namespace ResumeGeneratorX
@@ -29,7 +28,7 @@ namespace ResumeGeneratorX
             var templateOption = new Option<int?>(
                 name: "--template",
                 description: "Resume template")
-                .FromAmong("1", "2", "3");
+                .FromAmong("1");
             templateOption.AddAlias("-t");
             templateOption.Arity = ArgumentArity.ZeroOrOne;
 
@@ -47,7 +46,7 @@ namespace ResumeGeneratorX
                     Console.Error.WriteLine($"Input file \"{input.FullName}\" does not exist.");
                     return;
                 }
-                await Main2(input, output ?? input.Directory!, template ?? 2);
+                await Main2(input, output ?? input.Directory!, template ?? 1);
             }, inputFileOption, outputDirectoryOption, templateOption);
 
             return await rootCommand.InvokeAsync(args);
@@ -68,32 +67,6 @@ namespace ResumeGeneratorX
                 var html = template switch
                 {
                     1 => await htmlRenderer.Dispatcher.InvokeAsync(async () =>
-                    {
-                        var dic = new Dictionary<string, object?>
-                        {
-                            { "ResumeInfo", rio }
-                        };
-
-                        var parameters = ParameterView.FromDictionary(dic);
-
-                        var output = await htmlRenderer.RenderComponentAsync<Template2>(parameters);
-
-                        return output.ToHtmlString();
-                    }),
-                    2 => await htmlRenderer.Dispatcher.InvokeAsync(async () =>
-                    {
-                        var dic = new Dictionary<string, object?>
-                        {
-                            { "ResumeInfo", rio }
-                        };
-
-                        var parameters = ParameterView.FromDictionary(dic);
-
-                        var output = await htmlRenderer.RenderComponentAsync<Template2>(parameters);
-
-                        return output.ToHtmlString();
-                    }),
-                    3 => await htmlRenderer.Dispatcher.InvokeAsync(async () =>
                     {
                         var dic = new Dictionary<string, object?>
                         {
