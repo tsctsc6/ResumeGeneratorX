@@ -22920,9 +22920,46 @@
 </head>
 
 <body lang="zh-CN" class="" style="">
-    
+    <div id="___gatsby">
+        <div style="outline:none" tabindex="-1" id="gatsby-focus-wrapper">
+            <div class="ant-spin-nested-loading">
+                <div class="ant-spin-container">
+                    <div class="page">
+                        <div class="template2-resume resume-content">
+                            <div class="basic-info">
+                                <div class="profile">
+                                    <div class="profile-info">
+                                        <div class="name">@ResumeInfo.Profile.Name</div>
+                                        <div class="profile-list">
+                                            <div class="mobile">
+                                                <span role="img" aria-label="phone" 
+                                                    class="anticon anticon-phone"
+                                                    style="color: rgb(47, 87, 133); opacity: 0.85;">
+                                                    <svg viewBox="64 64 896 896" focusable="false" data-icon="phone"
+                                                         width="1em" height="1em" fill="currentColor" aria-hidden="true">
+                                                        <path d=@AssetsPath.MobileSvgPath></path>
+                                                    </svg>
+                                                    </span>
+                                                    @ResumeInfo.Profile.Mobile
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <deepl-input-controller></deepl-input-controller>
+    <div>
+        <div class="ant-message">
+            <div></div>
+        </div>
+    </div>
+    <style rc-util-key="antd-wave"></style>
 </body>
-    @ResumeInfo.Title
 </html>
 
 @code {
