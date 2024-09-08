@@ -23037,7 +23037,14 @@
                                                                 <span class="sub-info" style="margin-left: 4px;">@item.AcademicDegree</span>
                                                             </span>
                                                         </span>
-                                                        <span class="sub-info" style="float: right;">@item.BeginTime ~ @item.EndTime</span>
+                                                        @if (string.IsNullOrEmpty(item.BeginTime))
+                                                        {
+                                                            <span class="sub-info" style="float: right;">-</span>
+                                                        }
+                                                        else
+                                                        {
+                                                            <span class="sub-info" style="float: right;">@item.BeginTime ~ @TimeConverter(item.EndTime)</span>
+                                                        }
                                                     </div>
                                                 </div>
                                             }
