@@ -121,7 +121,8 @@
         {
             "WorkName": "a",
             "WorkDesc": "aa",
-            "VisitLink": "aaa"
+            "WorkLink": "aaa",
+            "LinkText": "aaa"
         }
     ],
     "AboutMe": {
