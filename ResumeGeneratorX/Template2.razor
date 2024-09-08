@@ -23198,7 +23198,42 @@
                                 }
                                 @if (ResumeInfo.ProjectList is not null)
                                 {
-
+                                    <div class="section project">
+                                        <div class="section-title" style="color: rgb(47, 87, 133);">
+                                            <span class="title">@ResumeInfo.TitleNameMap.ProjectList</span><span class="title-addon"></span>
+                                        </div>
+                                        <div class="section-body">
+                                            <div class="section section-project">
+                                                @foreach (var item in ResumeInfo.ProjectList)
+                                                {
+                                                    <div class="section-item">
+                                                        <div class="section-info">
+                                                            <b class="info-name">@item.ProjectName
+                                                                <span class="info-time">
+                                                                    @item.ProjectTime
+                                                                </span>
+                                                            </b>
+                                                            <span class="ant-tag ant-tag-has-color" style="background-color: rgb(139, 195, 74);">
+                                                                @item.ProjectRole
+                                                            </span>
+                                                        </div>
+                                                        <div class="section-detail">
+                                                            <span>项目描述：</span>
+                                                            <span>
+                                                                @item.ProjectDesc
+                                                            </span>
+                                                        </div>
+                                                        <div class="section-detail">
+                                                            <span>主要工作：</span>
+                                                            <span class="project-content">
+                                                                @item.ProjectContent
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
                                 }
                             </div>
                         </div>
