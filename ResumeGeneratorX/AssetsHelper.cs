@@ -21,6 +21,10 @@ public partial class AssetsHelper
 
     public static string ImgToBase64(string filePath)
     {
+        if (Uri.TryCreate(filePath, UriKind.Absolute, out Uri? resultURI))
+            if (resultURI.Scheme == Uri.UriSchemeHttp || resultURI.Scheme == Uri.UriSchemeHttps)
+                return filePath;
+
         var extension = Path.GetExtension(filePath)[1..];
         var avatarBase64 = Convert.ToBase64String(File.ReadAllBytes(filePath));
         return $"data:image/{extension};base64,{avatarBase64}";
