@@ -38,6 +38,7 @@ namespace ResumeGeneratorX
             sb.Append("<style id=\"dynamic\">");
             sb.Append(File.ReadAllText($"{assetsBasePath}\\head4.css"));
             sb.Append("</style>");
+            sb.Append("</head>");
         }
         protected void GenAvatar(StringBuilder sb)
         {
