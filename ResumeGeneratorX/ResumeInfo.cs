@@ -120,7 +120,9 @@
     {
         public string? WorkName { get; set; }
         public string? WorkDesc { get; set; }
-        public string? VisitLink { get; set; }
+        public string? WorkLink { get; set; }
+        public string? LinkText { get; set; }
+
     }
 
 }
