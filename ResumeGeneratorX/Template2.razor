@@ -23159,6 +23159,41 @@
                                     </div>
                                 }
                             </div>
+                            <div class="main-info">
+                                @if (ResumeInfo.WorkExpList is not null)
+                                {
+                                    <div class="section experience">
+                                        <div class="section-title" style="color: rgb(47, 87, 133);">
+                                            <span class="title">@ResumeInfo.TitleNameMap.WorkExpList</span><span class="title-addon"></span>
+                                        </div>
+                                        <div class="section-body">
+                                            <div class="section section-work-exp">
+                                                @foreach (var item in ResumeInfo.WorkExpList)
+                                                {
+                                                    <div class="section-item">
+                                                        <div class="section-info">
+                                                            <b class="info-name">@item.CompanyName<span class="sub-info">@item.DepartmentName</span></b>
+                                                            @if (string.IsNullOrEmpty(item.BeginTime))
+                                                            {
+                                                                <span class="info-time">-</span>
+                                                            }
+                                                            else
+                                                            {
+                                                                <span class="info-time">item.BeginTime ~ @TimeConverter(item.EndTime)</span>
+                                                            }
+                                                        </div>
+                                                        <div class="work-description">@item.WorkDesc</div>
+                                                    </div>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                                @if (ResumeInfo.ProjectList is not null)
+                                {
+
+                                }
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -23186,5 +23221,11 @@
         if (LevelRegister >= 0) return "ant-rate-star ant-rate-star-full";
         else if (LevelRegister > -20) return "ant-rate-star ant-rate-star-half";
         else return "ant-rate-star ant-rate-star-zero";
+    }
+
+    public string TimeConverter(string? time)
+    {
+        if (string.IsNullOrEmpty(time)) return "至今";
+        return time;
     }
 }
