@@ -1,4 +1,8 @@
-﻿using Microsoft.Playwright;
+﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Web;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Microsoft.Playwright;
 using System.CommandLine;
 using System.Text;
 using System.Text.Json;
@@ -55,26 +59,67 @@ namespace ResumeGeneratorX
             {
                 ResumeInfo? rio = JsonSerializer.Deserialize<ResumeInfo>(File.ReadAllText(input.FullName));
                 ArgumentNullException.ThrowIfNull(rio);
-                HtmlGenBase htmlGen = template switch
+
+                var services = new ServiceCollection();
+                services.AddLogging();
+                var servicesProvider = services.BuildServiceProvider();
+                var loggerFactory = servicesProvider.GetRequiredService<ILoggerFactory>();
+                await using var htmlRenderer = new HtmlRenderer(servicesProvider, loggerFactory);
+                var html = template switch
                 {
-                    1 => new Template1Gen(rio),
-                    2 => new Template2Gen(rio),
-                    3 => new Template3Gen(rio),
+                    1 => await htmlRenderer.Dispatcher.InvokeAsync(async () =>
+                    {
+                        var dic = new Dictionary<string, object?>
+                        {
+                            { "ResumeInfo", rio }
+                        };
+
+                        var parameters = ParameterView.FromDictionary(dic);
+
+                        var output = await htmlRenderer.RenderComponentAsync<Template2>(parameters);
+
+                        return output.ToHtmlString();
+                    }),
+                    2 => await htmlRenderer.Dispatcher.InvokeAsync(async () =>
+                    {
+                        var dic = new Dictionary<string, object?>
+                        {
+                            { "ResumeInfo", rio }
+                        };
+
+                        var parameters = ParameterView.FromDictionary(dic);
+
+                        var output = await htmlRenderer.RenderComponentAsync<Template2>(parameters);
+
+                        return output.ToHtmlString();
+                    }),
+                    3 => await htmlRenderer.Dispatcher.InvokeAsync(async () =>
+                    {
+                        var dic = new Dictionary<string, object?>
+                        {
+                            { "ResumeInfo", rio }
+                        };
+
+                        var parameters = ParameterView.FromDictionary(dic);
+
+                        var output = await htmlRenderer.RenderComponentAsync<Template2>(parameters);
+
+                        return output.ToHtmlString();
+                    }),
                     _ => throw new ArgumentOutOfRangeException($"There is no template {template}."),
                 };
-                var s = htmlGen.GenHtml();
                 var outputHtmlFilePath = Path.Combine(output.FullName, rio.Title + ".html");
-                File.WriteAllText(outputHtmlFilePath, s.ToString());
+                File.WriteAllText(outputHtmlFilePath, html);
                 Console.WriteLine($"Output at \"{outputHtmlFilePath}\"");
 
                 var outputPdfFilePath = Path.Combine(output.FullName, rio.Title + ".pdf");
-                await GenPdf(outputPdfFilePath, s);
+                await GenPdf(outputPdfFilePath, html);
                 Console.WriteLine($"Output at \"{outputPdfFilePath}\"");
             }
             catch (Exception e) { Console.Error.WriteLine(e.Message); }
         }
 
-        private static async Task GenPdf(string outputPdfFilePath, StringBuilder s)
+        private static async Task GenPdf(string outputPdfFilePath, string html)
         {
             bool isSuccess = false;
             while (!isSuccess)
@@ -89,7 +134,7 @@ namespace ResumeGeneratorX
                             Channel = "msedge"
                         });
                     var page = await browser.NewPageAsync();
-                    await page.SetContentAsync(s.ToString());
+                    await page.SetContentAsync(html);
                     await page.PdfAsync(new PagePdfOptions
                     {
                         Format = "A4",
