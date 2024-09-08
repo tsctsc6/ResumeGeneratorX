@@ -93,6 +93,7 @@ namespace ResumeGeneratorX
                     await page.PdfAsync(new PagePdfOptions
                     {
                         Format = "A4",
+                        PrintBackground = true,
                         Path = outputPdfFilePath
                     });
                     //await Console.In.ReadLineAsync();
