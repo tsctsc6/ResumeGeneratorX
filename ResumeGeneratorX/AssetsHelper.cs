@@ -2,7 +2,7 @@
 
 namespace ResumeGeneratorX;
 
-public partial class AssetsPath
+public partial class AssetsHelper
 {
     public static string Assets => Path.Combine(AppContext.BaseDirectory, "Assets");
     public static string SvgPath => Path.Combine(Assets, "svg.path");

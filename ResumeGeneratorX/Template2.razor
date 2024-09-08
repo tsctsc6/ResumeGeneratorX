@@ -20672,7 +20672,7 @@
             margin: 0 auto;
             display: block;
             width: 84px;
-            height: @AssetsPath.GetImgSize(ResumeInfo.Avatar.Size)px
+            height: @AssetsHelper.GetImgSize(ResumeInfo.Avatar.Size)px
         }
 
         .ant-badge {
@@ -22936,7 +22936,7 @@
                                                           style="color: rgb(47, 87, 133); opacity: 0.85;">
                                                         <svg viewBox="64 64 896 896" focusable="false" data-icon="phone"
                                                              width="1em" height="1em" fill="currentColor" aria-hidden="true">
-                                                            <path d=@AssetsPath.GetSvgPath("mobile")></path>
+                                                            <path d=@AssetsHelper.GetSvgPath("mobile")></path>
                                                         </svg>
                                                     </span>
                                                     @ResumeInfo.Profile.Mobile
@@ -22950,7 +22950,7 @@
                                                           style="color: rgb(47, 87, 133); opacity: 0.85;">
                                                         <svg viewBox="64 64 896 896" focusable="false" data-icon="mail"
                                                              width="1em" height="1em" fill="currentColor" aria-hidden="true">
-                                                            <path d=@AssetsPath.GetSvgPath("mail")></path>
+                                                            <path d=@AssetsHelper.GetSvgPath("mail")></path>
                                                         </svg>
                                                     </span>
                                                     @ResumeInfo.Profile.Email
@@ -22964,7 +22964,7 @@
                                                           style="color: rgb(47, 87, 133); opacity: 0.85;">
                                                         <svg viewBox="64 64 896 896" focusable="false" data-icon="github"
                                                              width="1em" height="1em" fill="currentColor" aria-hidden="true">
-                                                            <path d=@AssetsPath.GetSvgPath("github")></path>
+                                                            <path d=@AssetsHelper.GetSvgPath("github")></path>
                                                         </svg>
                                                     </span>
                                                     @ResumeInfo.Profile.Github
@@ -22978,7 +22978,7 @@
                                                           style="color: rgb(47, 87, 133); opacity: 0.85;">
                                                         <svg viewBox="64 64 896 896" focusable="false" data-icon="zhihu-circle"
                                                              width="1em" height="1em" fill="currentColor" aria-hidden="true">
-                                                            <path d=@AssetsPath.GetSvgPath("zhihu-circle")></path>
+                                                            <path d=@AssetsHelper.GetSvgPath("zhihu-circle")></path>
                                                         </svg>
                                                     </span>
                                                     @ResumeInfo.Profile.Zhihu
@@ -22992,7 +22992,7 @@
                                                           style="color: rgb(47, 87, 133); opacity: 0.85;">
                                                         <svg viewBox="64 64 896 896" focusable="false" data-icon="environment"
                                                              width="1em" height="1em" fill="currentColor" aria-hidden="true">
-                                                            <path d=@AssetsPath.GetSvgPath("environment")></path>
+                                                            <path d=@AssetsHelper.GetSvgPath("environment")></path>
                                                         </svg>
                                                     </span>
                                                     @ResumeInfo.Profile.WorkPlace
@@ -23006,7 +23006,7 @@
                                                           style="color: rgb(47, 87, 133); opacity: 0.85;">
                                                         <svg viewBox="64 64 896 896" focusable="false" data-icon="heart"
                                                              width="1em" height="1em" fill="currentColor" aria-hidden="true">
-                                                            <path d=@AssetsPath.GetSvgPath("heart")></path>
+                                                            <path d=@AssetsHelper.GetSvgPath("heart")></path>
                                                         </svg>
                                                     </span>
                                                     @ResumeInfo.Profile.PositionTitle
@@ -23016,7 +23016,7 @@
                                     </div>
                                     <div class="avatar">
                                         <span class="ant-avatar ant-avatar-square ant-avatar-image avatar">
-                                            <img alt="avatar" src=@AssetsPath.ImgToBase64(ResumeInfo.Avatar.Src)>
+                                            <img alt="avatar" src=@AssetsHelper.ImgToBase64(ResumeInfo.Avatar.Src)>
                                         </span>
                                     </div>
                                 </div>
@@ -23044,6 +23044,57 @@
                                         </div>
                                     </div>
                                 }
+                                @if (ResumeInfo.SkillList is not null)
+                                {
+                                    <div class="section section section-skill">
+                                        <div class="section-title" style="color: rgb(47, 87, 133);">
+                                            <span class="title">@ResumeInfo.TitleNameMap.SkillList</span><span class="title-addon"></span>
+                                        </div>
+                                        <div class="section-body">
+                                            @foreach (var item in ResumeInfo.SkillList)
+                                            {
+                                                <div class="skill-item">
+                                                    <span>
+                                                        <span role="img" aria-label="check-circle" class="anticon anticon-check-circle" style="color: rgb(255, 193, 7); margin-right: 8px;">
+                                                            <svg viewBox="64 64 896 896" focusable="false" data-icon="check-circle" width="1em" height="1em"
+                                                                 fill="currentColor" aria-hidden="true">
+                                                                <path d=@AssetsHelper.GetSvgPath("check-circle")>
+                                                                </path>
+                                                            </svg>
+                                                        </span>@item.SkillName: @item.SkillDesc
+                                                    </span>
+                                                    <ul class="ant-rate ant-rate-disabled skill-rate" tabindex="-1" role="radiogroup">
+                                                        @{ LevelRegister = item.SkillLevel; }
+                                                        @for (int i = 0; i < 5; i++)
+                                                        {
+                                                            LevelRegister -= 20;
+                                                            <li class=@GetStarString()>
+                                                                <div role="radio" aria-checked="true" aria-posinset="5" aria-setsize="5" tabindex="-1">
+                                                                    <div class="ant-rate-star-first">
+                                                                        <span role="img" aria-label="star" class="anticon anticon-star">
+                                                                            <svg viewBox="64 64 896 896" focusable="false" data-icon="star" width="1em" height="1em" fill="currentColor" aria-hidden="true">
+                                                                                <path d=@AssetsHelper.GetSvgPath("star")>
+                                                                                </path>
+                                                                            </svg>
+                                                                        </span>
+                                                                    </div>
+                                                                    <div class="ant-rate-star-second">
+                                                                        <span role="img" aria-label="star" class="anticon anticon-star">
+                                                                            <svg viewBox="64 64 896 896" focusable="false" data-icon="star" width="1em" height="1em" fill="currentColor" aria-hidden="true">
+                                                                                <path d=@AssetsHelper.GetSvgPath("star")>
+                                                                                </path>
+                                                                            </svg>
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+                                                        }
+                                                    </ul>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                }
                             </div>
                         </div>
                     </div>
@@ -23064,4 +23115,13 @@
 @code {
     [Parameter]
     public ResumeInfo ResumeInfo { get; set; }
+
+    public int LevelRegister { get; set; }
+
+    public string GetStarString()
+    {
+        if (LevelRegister >= 0) return "ant-rate-star ant-rate-star-full";
+        else if (LevelRegister > -20) return "ant-rate-star ant-rate-star-half";
+        else return "ant-rate-star ant-rate-star-zero";
+    }
 }
